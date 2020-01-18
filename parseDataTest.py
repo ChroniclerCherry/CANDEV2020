@@ -23,3 +23,20 @@ def filterList(list, key):
         if key in list[_]:
             outputList.append(list[_])
     return outputList
+
+'''quick sort, by hand'''
+def quickSort(inList,key):
+    import random
+    if len(inList) == 0 or len(inList) == 1:
+        return inList
+    
+    pivot = inList.pop(random.randint(0,(len(inList))))
+    lList = []; rList = []
+
+    for _ in inList:
+        if _ <= pivot:
+            lList.append(_)
+        else:
+            rList.append(_)
+
+    return quickSort(lList,key)+[pivot]+quickSort(rList,key)
