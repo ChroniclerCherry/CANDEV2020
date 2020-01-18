@@ -7,6 +7,7 @@ def csv2dlist(fileName):
         reader = csv.reader(testFile)
         for row in reader:
             twoDeeList.append(row)
+    return twoDeeList
 
 '''Sorts a 2d list by a key index
 not sure if this works'''
@@ -14,7 +15,6 @@ def sort2d(list,key):
     #sort the list by known index
     #using timSort
     sortedList = sorted(list,key = lambda row: row[key])
-    print (sort2d)
 
 '''Looks to see if serachTerm is in the list, puts it to a new list.'''
 def filterList(list, key):
