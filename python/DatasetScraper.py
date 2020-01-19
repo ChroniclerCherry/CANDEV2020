@@ -18,6 +18,8 @@ class DatasetScraper:
         soup = BeautifulSoup(mystr, "lxml")
         spans = soup.find_all("span",{"property":"distribution"}) #get all spans
 
+        #the data is returned as a dictionary with the name of the file + language as the key
+        #and the url to the csv file as the value
         dictionary = dict()
 
         #extracts the language,name, and the url to the csv for each download
