@@ -1,7 +1,7 @@
 <?php
     #class written by Ronald Tavarez for CANDEV 2020
     #employee object class for querying department table from mysql database
-    class Department extends Connection{
+    class Department{
 
         #private fields
         private $id; #department name

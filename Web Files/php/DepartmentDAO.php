@@ -35,6 +35,26 @@
             return false;
         }
 
+        #query database for all finance cases
+        public function getFinance(){
+            $query_result = $this->connection->query("SELECT * FROM TransferDepartment WHERE DEPT_EN_DESC like 'Finance'");
+            $departments = (array) null;
+
+            #if query is not empty
+            if ($query_result->num_rows >= 1){
+                while ($row = $query_result->fetch_assoc()){ #while query has results
+                    array_push($departments, new Department($row['id'], $row['AGRG_PYMT_AMT'], $row['CNTRY_EN_NM'], 
+                    $row['CTY_EN_NM'], $row['DEPT_EN_DESC'], $row['DEPARTMENTNUMBER'], 
+                    $row['FSCL_YR'], $row['MINC'], $row['MINE'], $row['PROVTER_EN'], 
+                    $row['RCPNT_CLS_EN_DESC'], $row['RCPNT_NML_EN_DESC'], $row['TOT_CY_XPND_AMT']));
+                }
+                $query_result->free(); #free memory
+                return $departments; #return database rows
+            }
+            $query_result->free(); #free memory
+            return false;
+        }
+
         public function addDepartment($department){
             #if there isn't an error connecting to db
             if (!$this->connection->connect_errno){

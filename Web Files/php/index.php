@@ -53,53 +53,60 @@
 
         <!-- Column 2 - DATA VISUALIZATION -->
         <div class="column" id="showcase">
-            <script>
-                window.onload = function () {
-                 
-                var dataPoints = [];
-                 
-                var chart = new CanvasJS.Chart("showcase", {
-                    animationEnabled: true,
-                    exportEnabled: true,
-                    title:{
-                        text: "Branch"
-                    },
-                    axisY: {
-                        title: "Count",
-                        includeZero: false
-                    },
-                    data: [{
-                        type: "column",
-                        toolTipContent: "{y} Countries",
-                        dataPoints: dataPoints
-                    }]
-                });
-                 
-                $.get("./EmployeesSalary.csv", getDataPointsFromCSV);
-                 
-                //CSV Format
-                //Year,Volume
-                function getDataPointsFromCSV(csv) {
-                    let countColumn = new Array();
-                    var csvLines = points = [];
-                    csvLines = csv.split(/[\r?\n|\r|\n]+/);
-                    for (var i = 0; i < csvLines.length; i++) {
-                        if (csvLines[i].length > 0) {
-                            points = csvLines[i].split(",");
-                            countColumn.push(points);
-                            for (let a=0; a<countColumn.length; a++)
-                            dataPoints.push({
-                                label: countColumn[0],
-                                //y: parseFloat(points[6])
-                                y: countColumn.length
-                            });
-                        }
-                    }
-                    chart.render();
-                }
-                 
-                }
-                </script>
+            <?php
+            require 'DepartmentDAO.php';
+            $DAO = new DepartmentDAO();
+            $rows = $DAO->getDepartments();
+            
+                echo '<table>'.
+                        '<thead>'.
+                            '<tr>'
+                            .
+                            '<th>id</th>
+                             <th>paymentAmount</th>
+                             <th>country</th>
+                             <th>city</th>
+                             <th>departmentName</th>
+                             <th>departmentNumber</th>
+                             <th>fiscalYear</th>
+                             <th>minc</th>
+                             <th>mine</th>
+                             <th>province</th>
+                             <th>description</th>
+                             <th>address</th>
+                             <th>totalCurrentYearAmount</th>
+                             </tr>
+                        </thead>
+                        <tbody>';
+                        if ($rows[0] != null){
+                            for ($i = 0; $i < 25; $i++){
+                                echo '
+                                <tr>
+                                    <td>'.$rows[$i]->getId().'</td>
+                                    <td>'.$rows[$i]->getPaymentAmount().'</td>
+                                    <td>'.$rows[$i]->getCountry().'</td>
+                                    <td>'.$rows[$i]->getCity().'</td>
+                                    <td>'.$rows[$i]->getDepartmentName().'</td>
+                                    <td>'.$rows[$i]->getDepartmentNumber().'</td>
+                                    <td>'.$rows[$i]->getFiscalYear().'</td>
+                                    <td>'.$rows[$i]->getMinc().'</td>
+                                    <td>'.$rows[$i]->getMine().'</td>
+                                    <td>'.$rows[$i]->getProvince().'</td>
+                                    <td>'.$rows[$i]->getDescription().'</td>
+                                    <td>'.$rows[$i]->getAddress().'</td>
+                                    <td>'.$rows[$i]->getTotalCurrentYearAmount().'</td>
+                                </tr>
+                                ';
+                            }
+                        } else {
+                            echo '<tr><td>No Customers in Mailing List</td></tr>';
+                        }#end of if
+
+                        echo '</tbody>
+                                </table>';
+                        
+            ?>
+            
                 <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
                 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
         </div>
