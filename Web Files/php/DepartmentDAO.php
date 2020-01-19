@@ -17,16 +17,16 @@
 
         #query database for all departments
         public function getDepartments(){
-            $query_result = $this->connection->query('SELECT * FROM ');
+            $query_result = $this->connection->query('SELECT * FROM TransferDepartment');
             $departments = (array) null;
 
             #if query is not empty
             if ($query_result->num_rows >= 1){
                 while ($row = $query_result->fetch_assoc()){ #while query has results
-                    $departments[] = new Department($row['id'], $row['department'], $row['departmentCode'], 
-                    $row['programStreamName'], $row['subProgramStreamName'], $row['transferPaymentProgram'], 
-                    $row['DRFProgram'], $row['programCode'], $row['programStreamId'], $row['intermediaries'], 
-                    $row['namedRecipient']);
+                    array_push($departments, new Department($row['id'], $row['AGRG_PYMT_AMT'], $row['CNTRY_EN_NM'], 
+                    $row['CTY_EN_NM'], $row['DEPT_EN_DESC'], $row['DEPARTMENTNUMBER'], 
+                    $row['FSCL_YR'], $row['MINC'], $row['MINE'], $row['PROVTER_EN'], 
+                    $row['RCPNT_CLS_EN_DESC'], $row['RCPNT_NML_EN_DESC'], $row['TOT_CY_XPND_AMT']));
                 }
                 $query_result->free(); #free memory
                 return $departments; #return database rows
@@ -38,18 +38,21 @@
         public function addDepartment($department){
             #if there isn't an error connecting to db
             if (!$this->connection->connect_errno){
-                $query_add = 'INSERT INTO department VALUES (?,?,?,?,?,?,?,?,?,?,?)';
+                $query_add = 'INSERT INTO TransferDepartment VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)';
                 $stmt = $this->connection->prepare($query_add);
-                $stmt->bind_param('sissssiiii', $department->getDepartment(),
-                                                $department->getDepartmentCode(),
-                                                $department->getProgramStreamName(),
-                                                $department->getSubProgramStreamName(),
-                                                $department->getTransferPaymentProgram(),
-                                                $department->getDRFProgram(),
-                                                $department->getProgramCode(),
-                                                $department->getProgramStreamId(),
-                                                $department->getIntermediaries(),
-                                                $department->getNameRecipient());
+                $stmt->bind_param('iisssisissssi', $department->getid(),
+                                                $department->getPaymentAmount(),
+                                                $department->getCountry(),
+                                                $department->getCity(),
+                                                $department->getDepartmentName(),
+                                                $department->getDepartmentNumber(),
+                                                $department->getFiscalYear(),
+                                                $department->getMinc(),
+                                                $department->getMine(),
+                                                $department->getProvince(),
+                                                $department->getDescription(),
+                                                $department->getAddress(),
+                                                $department->getTotalCurrentYearAmount());
                 $stmt->execute();
                 if ($stmt->error){
                     return $stmt->error;
