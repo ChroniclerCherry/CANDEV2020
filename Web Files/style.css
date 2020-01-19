@@ -42,6 +42,7 @@ body{
     height: 90vh;
     display: flex;
     flex-wrap: wrap;
+    
 }
 
 .button{
@@ -50,12 +51,15 @@ body{
     height: 22%;
     margin: auto auto;
     transition: 0.2s ease;
+    transition: transform .2s; /* Animation */
+ 
 }
 
 .button:hover{
     cursor: pointer;
     background: #2268eb;
     transition: 0.2s ease;
+    transform: scale(1.1);
 }
 
 /**GRAPH VISUALIZATION GOES HERE**/
