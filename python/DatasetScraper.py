@@ -51,8 +51,7 @@ class DatasetScraper:
     def get_CSV_from_name(self,name):
         return self.get_CSV_from_url(self.data_from_transfer_payments.get(name))
 
-#test code
 scraper = DatasetScraper()
-#returns all CSVs with the valid english datasets
-for data in scraper.get_valid_CSV():
-    print(data)
+#get all CSVs with the valid english datasets
+data = pd.concat(scraper.get_valid_CSV())
+data.to_csv(r'TransferPayments.csv')
