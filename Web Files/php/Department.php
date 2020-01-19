@@ -92,7 +92,7 @@
         }
         
         public function getNamedRecipient(){
-            return $this->$named_recipient;
+            return $this->named_recipient;
         }
 
         public function setNameRecipient($named_recipient){
