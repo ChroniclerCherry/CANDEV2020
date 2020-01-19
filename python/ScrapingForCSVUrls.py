@@ -14,7 +14,7 @@ class DatasetScraper:
         mystr = mybytes.decode("utf8") #decodes to utf8
         fp.close()
 
-        #use beautifulcoup to get all the span blocks which contains the data we want
+        #use beautifulSoup to get all the span blocks which contains the data we want
         soup = BeautifulSoup(mystr, "lxml")
         spans = soup.find_all("span",{"property":"distribution"}) #get all spans
 
@@ -36,9 +36,21 @@ class DatasetScraper:
     def get_names_from_datasets(self):
         return self.data_from_transfer_payments.keys()
 
+    #For now we only deal with the valid data that's in english
+    def get_valid_years_english(self):
+        for data in self.data_from_transfer_payments.keys():
+            if (int)(data.split(" ")[0]) >= 2010 and ("(en)" in data):
+                yield data
+
+    def get_valid_CSV(self):
+        for data in self.get_valid_years_english():
+            yield {(int)(data.split(" ")[0]) : self.get_CSV_from_name(data)}
+
     def get_CSV_from_name(self,name):
         return self.get_CSV_from_url(self.data_from_transfer_payments.get(name))
 
 #test code
 scraper = DatasetScraper()
-print(scraper.get_CSV_from_name("2010 – Transfer Payments(en)"))
+#returns all CSVs with the year as the key as the year that is valid english datasets
+for data in scraper.get_valid_CSV():
+    print(data)
