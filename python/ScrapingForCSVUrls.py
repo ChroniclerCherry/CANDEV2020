@@ -44,13 +44,13 @@ class DatasetScraper:
 
     def get_valid_CSV(self):
         for data in self.get_valid_years_english():
-            yield {(int)(data.split(" ")[0]) : self.get_CSV_from_name(data)}
+            yield self.get_CSV_from_name(data)
 
     def get_CSV_from_name(self,name):
         return self.get_CSV_from_url(self.data_from_transfer_payments.get(name))
 
 #test code
 scraper = DatasetScraper()
-#returns all CSVs with the year as the key as the year that is valid english datasets
+#returns all CSVs with the valid english datasets
 for data in scraper.get_valid_CSV():
     print(data)
