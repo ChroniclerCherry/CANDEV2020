@@ -7,5 +7,5 @@ cleaned = data.groupby(['MINC','DEPT_EN_DESC','FSCL_YR'])["AGRG_PYMT_AMT"].sum()
 
 graph = px.bar(cleaned,x = 'MINC',y='Sum',
 animation_frame="FSCL_YR",
-labels={'MINC':'Department',"Average":"Total Payment Amount","FSCL_YR":"Fiscal Year"})
-graph.write_html('DepartmentPaymentPerFiscalYear', auto_open=True)
+labels={'MINC':'Department',"Sum":"Total Payment Amount","FSCL_YR":"Fiscal Year"})
+graph.write_html('DepartmentPaymentPerFiscalYear.html', auto_open=True)
