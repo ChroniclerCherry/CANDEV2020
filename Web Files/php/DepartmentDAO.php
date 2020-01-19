@@ -35,6 +35,23 @@
             return false;
         }
 
+        
+        public function getDistinctDepartments(){
+            $query_result = $this->connection->query('SELECT DISTINCT DEPT_EN_DESC FROM transferdepartment');
+            $departments = (array) null;
+
+            #if query is not empty
+            if ($query_result->num_rows >= 1){
+                while ($row = $query_result->fetch_assoc()){ #while query has results
+                    $departments = $row['DEPT_EN_DESC'];
+                }
+                $query_result->free(); #free memory
+                return $departments; #return database rows
+            }
+            $query_result->free(); #free memory
+            return false;
+        
+    }
         #query database for all finance cases
         public function getByDepartment($dep){
             echo '<h1>'.$dep.'</h1>';
@@ -84,6 +101,18 @@
                 return 'Could not connect to Database';
             }
         }
-        
+
+    }
+    
+    if (isset($_POST['functionname'])){
+        $DAO = new DepartmentDAO();
+        switch($_POST['functionname']){
+            case 'getDistinctDepartments':
+                $DAO->getDistinctDepartments();
+            break;
+            case 'getSumPayment':
+
+            break;
+        }
     }
 ?>

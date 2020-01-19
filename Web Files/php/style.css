@@ -66,7 +66,7 @@ table{
     width: 100%;
 }
 
-table, th, td{
+table, th, td, h1{
     border: solid 1px rgb(145, 144, 144);
     margin: 0;
     border-collapse: collapse;
