@@ -4,16 +4,16 @@
     class Connection{
 
         #private fields
-        private $connection; #stores mysqli connection object
-        private $db_host = "localhost"; #database host
-        private $db_user = "postgres"; #database username
-        private $db_pass = "2712875yZ"; #database password
-        private $db = "postgres";
+        protected $connection; #stores mysqli connection object
+        protected static $db_host = "localhost"; #database host
+        protected static $db_user = "candev"; #database username
+        protected static $db_pass = "candev"; #database password
+        protected static $db = "candev";
 
         #each time connection to database is needed a new connection must be constructed
         public function __construct(){
             try{ #try to connect to database
-                $this->connection = new mysqli($this->db_host, $this->db_user, $this->db_pass, $this->db); #constructs new mysqli connection object and stores it within connection field
+                $this->connection = new mysqli(self::$db_host, self::$db_user, self::$db_pass, self::$db); #constructs new mysqli connection object and stores it within connection field
             } catch (mysqli_sql_exception $e){ #catch exception
                 throw $e; #throw exception
             }
