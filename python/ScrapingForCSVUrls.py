@@ -52,5 +52,9 @@ class DatasetScraper:
 #test code
 scraper = DatasetScraper()
 #returns all CSVs with the valid english datasets
-for data in scraper.get_valid_CSV():
-    print(data)
+#for data in scraper.get_valid_CSV():
+#print(data)
+  
+#take all the valid data set and write it to a one csv file   
+result = pd.concat(scraper.get_valid_CSV(), axis=0, join='outer', ignore_index=False)
+result.to_csv(r'test.csv')
