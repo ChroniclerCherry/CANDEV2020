@@ -13,3 +13,5 @@ Datavisualization.py demonstrates one way to immediately work with the data, doi
 ## The Web Files folder
 
 The html/css/javascript/php for the web portion of this demo is found in the Web Files folder. Currently the demo only pulls from a single database table, but is easily scalable to multiple tables with many datasets. From the website, users can directly manipulate and play with the data in a visual way through search filters and selections
+
+Data visualization is not fully dynamic yet due to time constraints, but much of the code to do so has been implemented already
