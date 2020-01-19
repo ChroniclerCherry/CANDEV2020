@@ -36,8 +36,9 @@
         }
 
         #query database for all finance cases
-        public function getFinance(){
-            $query_result = $this->connection->query("SELECT * FROM TransferDepartment WHERE DEPT_EN_DESC like 'Finance'");
+        public function getByDepartment($dep){
+            echo '<h1>'.$dep.'</h1>';
+            $query_result = $this->connection->query("SELECT * FROM TransferDepartment WHERE DEPT_EN_DESC like '".$dep."%'");
             $departments = (array) null;
 
             #if query is not empty

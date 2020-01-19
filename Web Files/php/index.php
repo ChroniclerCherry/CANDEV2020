@@ -16,23 +16,23 @@
             <!-- Nav search -->
             <div id="search_container">
                 <form action="">
-                    <select name="search">
-                        <option value="AgricultureAndAgri-Food">Agriculture and Agri-Food</option>
-                        <option value="CanadianFoodInspectionAgency">Canadian Food Inspection Agency</option>
-                        <option value="AtlanticCanadaOpportunitiesAgency">Atlantic Canada Opportunities Agency</option>
-                        <option value="CanadaRevenueAgency">Canada Revenue Agency</option>
-                        <option value="NationalFilmBoard">National Film Board</option>
-                        <option value="OfficeoftheCo-ordinator-StatusofWomen">Office of the Co-ordinator - Status of Women</option>
-                        <option value="CanadianHeritage">Canadian Heritage</option>
-                        <option value="LibraryandArchivesofCanada">Library and Archives of Canada</option>
-                        <option value="CitizenshipAndImmigration">Citizenship and Immigration</option>
-                        <option value="EconomicDevelopmentAgencyofCanada">Economic Development Agency of Canada</option>
+                    <select name="search" id="search_bar">
+                        <option value="Agriculture And Agri-Food">Agriculture and Agri-Food</option>
+                        <option value="Canadian Food Inspection Agency">Canadian Food Inspection Agency</option>
+                        <option value="Atlantic Canada Opportunities Agency">Atlantic Canada Opportunities Agency</option>
+                        <option value="Canada Revenue Agency">Canada Revenue Agency</option>
+                        <option value="National Film Board">National Film Board</option>
+                        <option value="Office of the Co-ordinator - Status of Women">Office of the Co-ordinator - Status of Women</option>
+                        <option value="Canadian Heritage">Canadian Heritage</option>
+                        <option value="Library and Archives of Canada">Library and Archives of Canada</option>
+                        <option value="Citizenship And Immigration">Citizenship and Immigration</option>
+                        <option value="Economic Development Agency of Canada">Economic Development Agency of Canada</option>
                         <option value="Environment">Environment</option>
-                        <option value="CanadianEnvironmentalAssessmentAgency">Canadian Environmental Assessment Agency</option>
-                        <option value="ParksCanadaAgency">Parks Canada Agency</option>
+                        <option value="Canadian Environmental Assessment Agency">Canadian Environmental Assessment Agency</option>
+                        <option value="Parks Canada Agency">Parks Canada Agency</option>
                         <option value="Finance">Finance</option>
-                        <option value="FinancialTransactionsAndReportsAnalysisCentre">Financial Transactions and Reports Analysis Centre</option>
-                        <option value="FisheriesAndOceans">Fisheries and Oceans</option>
+                        <option value="Financial Transactions and Reports Analysis Centre">Financial Transactions and Reports Analysis Centre</option>
+                        <option value="Fisheries and Oceans">Fisheries and Oceans</option>
                     </select>
                     <input type="submit">
                 </form>
@@ -56,30 +56,34 @@
             <?php
             require 'DepartmentDAO.php';
             $DAO = new DepartmentDAO();
-            $rows = $DAO->getDepartments();
-            
+            if (!isset($_GET['search'])){
+                $rows = $DAO->getDepartments();
+            } else {
+                $rows = $DAO->getByDepartment($_GET['search']);
+            }
                 echo '<table>'.
                         '<thead>'.
                             '<tr>'
                             .
-                            '<th>id</th>
-                             <th>paymentAmount</th>
-                             <th>country</th>
-                             <th>city</th>
-                             <th>departmentName</th>
-                             <th>departmentNumber</th>
-                             <th>fiscalYear</th>
-                             <th>minc</th>
-                             <th>mine</th>
-                             <th>province</th>
-                             <th>description</th>
-                             <th>address</th>
-                             <th>totalCurrentYearAmount</th>
+                            '<th>ID</th>
+                             <th>PA</th>
+                             <th>COUNTRY</th>
+                             <th>CITY</th>
+                             <th>DEP NAME</th>
+                             <th>DEP NUM</th>
+                             <th>FSCL YR</th>
+                             <th>MINC</th>
+                             <th>MINE</th>
+                             <th>PROV</th>
+                             <th>DESC</th>
+                             <th>ADDRESS</th>
+                             <th>TCYA</th>
                              </tr>
                         </thead>
                         <tbody>';
                         if ($rows[0] != null){
                             for ($i = 0; $i < 25; $i++){
+                                if ($i < count($rows)){
                                 echo '
                                 <tr>
                                     <td>'.$rows[$i]->getId().'</td>
@@ -97,6 +101,9 @@
                                     <td>'.$rows[$i]->getTotalCurrentYearAmount().'</td>
                                 </tr>
                                 ';
+                                } else {
+                                break;
+                                }
                             }
                         } else {
                             echo '<tr><td>No Customers in Mailing List</td></tr>';

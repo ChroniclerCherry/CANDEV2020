@@ -1,7 +1,7 @@
 *{
     margin: 0;
     padding: 0;
-    
+    font-family: sans-serif;
 }
 
 body{
@@ -9,7 +9,7 @@ body{
     position: relative;
     height: 100%;
     border: solid 1px #7e9a9a;
-    background: #f9f7f4;
+    background: #3b3b3b;
 }
 .container{
     display: flex;
@@ -41,9 +41,7 @@ body{
     border: solid 1px #f6d8ac;
     height: 96vh;
     display: flex;
-    flex-wrap: wrap;
-    
-    
+    flex-wrap: wrap;   
 }
 
 .button{
@@ -62,6 +60,40 @@ body{
     background: #f6d8ac;
     transition: 0.2s ease;
     transform: scale(1.1);
+}
+table{
+    table-layout: fixed;
+    width: 100%;
+}
+
+table, th, td{
+    border: solid 1px rgb(145, 144, 144);
+    margin: 0;
+    border-collapse: collapse;
+    color: aliceblue;
+    text-align: center;
+}
+
+h1{
+    color: aliceblue;
+}
+
+th{
+    color: blanchedalmond;
+}
+
+th:hover{
+    cursor: pointer;
+    background: blanchedalmond;
+    color: black;
+    transition: 0.2s ease-in-out;
+}
+
+td:hover{
+    cursor: pointer;
+    background: blanchedalmond;
+    color: black;
+    transition: 0.2s ease-in-out;
 }
 @keyframes slideInFromLeft {
     0% {
