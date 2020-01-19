@@ -39,7 +39,6 @@ class DatasetScraper:
     def get_CSV_from_name(self,name):
         return self.get_CSV_from_url(self.data_from_transfer_payments.get(name))
 
-
 #test code
 scraper = DatasetScraper()
 print(scraper.get_CSV_from_name("2010 – Transfer Payments(en)"))
