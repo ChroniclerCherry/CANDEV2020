@@ -19,7 +19,7 @@ body{
 /**NAVIGATION**/
 #navigation{
     border: solid 2px #2268eb;
-    width: 40%;
+    width: 10%;
     height: 100%;
 }
 
@@ -28,6 +28,7 @@ body{
     text-align: center;
     padding: 5px;
     margin-bottom: 10px;
+    
 }
 
 #search_bar{
@@ -59,8 +60,7 @@ body{
 
 /**GRAPH VISUALIZATION GOES HERE**/
 #showcase{
-
-
     border: solid 2px #eb22c0;
-    width: 100%;
+    width: 90%;
 }
+
